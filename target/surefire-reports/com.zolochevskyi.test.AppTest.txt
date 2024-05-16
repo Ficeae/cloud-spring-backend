@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.zolochevskyi.test.AppTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.047 s - in com.zolochevskyi.test.AppTest
