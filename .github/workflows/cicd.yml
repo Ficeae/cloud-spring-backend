@@ -1,0 +1,35 @@
+name: CICD
+
+on:
+  push:
+    branches: [ec2-deployment]
+
+jobs:
+  build:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v3
+      - name: JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java version: '17'
+          distribution: 'temurin'
+      - name: Build project
+        run: mvn clean install
+      - name: docker hub
+        run: docker login -u ${{secrets.DOCKERHUB_USER}} -p ${{secrets.DOCKERHUB_PASS}}
+      - name: Build docker image
+        run: docker build -t ficeae/cloud-spring-backend .
+      - name: Publish image to docker hub
+        run: docker push ficeae/cloud-spring-backend:latest
+
+  deploy:
+    needs: build
+    runs-on: [aws-ec2]
+    steps:
+      - name: pull image
+        run: docker pull ficeae/cloud-spring-backend:latest
+      - name: Delete old container
+        run: docker rm -f cloud-spring-backend-container
+      - name: Run docker container
+        run: docker run -d -p 8080:8080 --name cloud-spring-backend-container ficeae/cloud-spring-backend
