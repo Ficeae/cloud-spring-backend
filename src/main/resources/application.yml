@@ -5,19 +5,18 @@ spring:
     password: password
 
   jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
+    #show-sql: true
+    hibernate:
+      ddl-auto: update
+  #banner:
+    #location: classpath:banner.txt
 
-  banner:
-    location: classpath:banner.txt
+  #mvc:
+    #path match:
+      #matching-strategy: ant_path_matcher
 
-  mvc:
-    path match:
-      matching-strategy: ant_path_matcher
-
-server:
-  port: 8080
+#server:
+  #port: 8080
