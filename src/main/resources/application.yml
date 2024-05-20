@@ -14,9 +14,9 @@ spring:
   #banner:
     #location: classpath:banner.txt
 
-  #mvc:
-    #path match:
-      #matching-strategy: ant_path_matcher
+  mvc:
+    path match:
+      matching-strategy: ant_path_matcher
 
-#server:
-  #port: 8080
+server:
+  port: 8080
